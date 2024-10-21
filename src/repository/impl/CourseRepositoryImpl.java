@@ -28,7 +28,7 @@ public class CourseRepositoryImpl implements CourseRepository {
         pst.setString(1, course.getCourseTitle());
         pst.setInt(2, course.getCourseUnit());
         pst.executeUpdate();
-        return getCourseByTitle(course.getCourseTitle()).isPresent();
+        return getCourseByTitle(course.getCourseTitle()).isEmpty();
 
     }
 

@@ -18,12 +18,7 @@ import java.util.Optional;
 import static data.Database.*;
 import static data.Query.*;
 
-public class StudentRepositoryImpl implements StudentRepository{
-    //language=sql
-
-
-
-
+public  class StudentRepositoryImpl implements StudentRepository{
 
     @Override
     public List<Student> getAll() throws SQLException {

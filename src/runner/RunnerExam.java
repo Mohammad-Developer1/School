@@ -40,7 +40,7 @@ public class RunnerExam {
 //        System.out.println("enter a name :");
 //        String name = sc.nextLine();
 //        try {
-//            ApplicationContext.getExamService().deleteExam(name);
+//            ApplicationContext.getExamService()(name);
 //            System.out.println("dune removed exam");
 //        }catch (Exception exception){
 //            System.out.println(exception.getMessage());

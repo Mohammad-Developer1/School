@@ -45,7 +45,7 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     public Optional<Course> getCourseByTitle(String title) throws SQLException {
-        if (cr.getCourseByTitle(title).isPresent()) {
+        if (cr.getCourseByTitle(title).isEmpty()) {
             throw new IllegalArgumentException("Course already exists");
         }else {
             return cr.getCourseByTitle(title);
