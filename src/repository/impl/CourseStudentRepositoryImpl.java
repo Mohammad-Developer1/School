@@ -2,6 +2,7 @@ package repository.impl;
 
 
 import model.dto.CourseDto;
+import model.dto.Reportcard;
 import repository.CourseStudentRepository;
 import util.SecurityContext;
 
@@ -10,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static data.Query.*;
 import static data.Database.*;
@@ -83,13 +85,32 @@ public class CourseStudentRepositoryImpl implements CourseStudentRepository {
      return 0;
     }
 
+    @Override
+    public Optional<List<Reportcard>> reportCard(long studentId) throws SQLException {
+        PreparedStatement pst=getPreparedStatement(KARNAME);
+        pst.setLong(1, studentId);
+        ResultSet rs=pst.executeQuery();
+        List<Reportcard> reportCards=new ArrayList<>();
+        while (rs.next()) {
+            reportCards.add(
+                    new Reportcard(rs.getString("course_title"),
+                            rs.getDouble("score")));
+
+        }if (reportCards.isEmpty()){
+            throw new RuntimeException("there is some problem  ");
+        }else {
+            return Optional.of(reportCards);
+        }
+    }
+
+
     static List<CourseDto> getCourseDtos(ResultSet rs) throws SQLException {
         List<CourseDto> courses = new ArrayList<>();
         while (rs.next()) {
             courses.add(new CourseDto(
                             rs.getString("course_title"),
                             rs.getInt("course_unit"),
-                            rs.getString("teachername"),
+                            rs.getString("teacherName"),
                             rs.getDate("date").toLocalDate(),
                             rs.getTime("time").toLocalTime()
                     )
@@ -97,6 +118,8 @@ public class CourseStudentRepositoryImpl implements CourseStudentRepository {
         }
         return courses;
     }
+
+
 
 }
 

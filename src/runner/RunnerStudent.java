@@ -1,9 +1,12 @@
 package runner;
 
 import model.Student;
+import model.dto.Reportcard;
 import util.ApplicationContext;
 
 import java.time.LocalDate;
+import java.util.List;
+import java.util.Optional;
 import java.util.Scanner;
 
 public class RunnerStudent {
@@ -128,4 +131,19 @@ public class RunnerStudent {
         System.out.println(e.getMessage());
         }
     }
+
+    public static void ShowMyReportCard(){try {
+        Optional<List<Reportcard>> reportcards = ApplicationContext.getCourseStudentService().reportCard();
+        System.out.printf("%-13s %-5s\n", "title", "score");
+        for (Reportcard item : reportcards.get()) {
+            System.out.printf("%-13s %-5s\n", item.getTitle(), item.getScore());
+        }
+        System.out.println("");
+    } catch (Exception e) {
+        System.out.println(e.getMessage());
+    }
+
+
+    }
+
 }

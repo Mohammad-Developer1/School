@@ -152,7 +152,8 @@ public class Runner {
         System.out.println("3 - Show All courses");
         System.out.println("4 - show My courses");
         System.out.println("5 - edit information");
-        System.out.println("6 - return to last page");
+        System.out.println("6 - ShowMyReportCard");
+        System.out.println("7 - return to last page");
         System.out.println("enter a number");
         int number = sc.nextInt();
         switch (number) {
@@ -177,6 +178,9 @@ public class Runner {
                 student();
                 break;
             case 6:
+                RunnerStudent.ShowMyReportCard();
+                student();
+            case 7:
                 signInStAndTe();
         }
 
@@ -188,7 +192,8 @@ public class Runner {
         System.out.println("2 - Grading the student ");
         System.out.println("3 - edit information");
         System.out.println("4 - show My information");
-        System.out.println("5 - return to last page");
+        System.out.println("5 - add Exam");
+        System.out.println("6 - return to last page");
         System.out.println("enter a number");
         int number = sc.nextInt();
         switch (number) {
@@ -205,6 +210,9 @@ public class Runner {
                 RunnerTeacher.showMyInformation();
                 teacher();
             case 5:
+                RunnerTeacher.addExam();
+                teacher();
+            case 6:
                 signInStAndTe();
         }
     }

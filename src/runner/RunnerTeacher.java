@@ -1,11 +1,13 @@
 package runner;
 
+import model.Exam;
 import model.Teacher;
 import model.dto.StudentDto;
 import util.ApplicationContext;
 import util.SecurityContext;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Scanner;
 
 public class RunnerTeacher {
@@ -138,6 +140,25 @@ public class RunnerTeacher {
             System.out.println(exception.getMessage());
         }
         System.out.println("\033[0m");
+    }
+    public static void addExam() {
+        System.out.println("enter a Name:");
+        String name = sc.nextLine();
+        System.out.println("enter a Date (2000-01-01): ");
+        String date = sc.nextLine();
+        int year = Integer.parseInt(date.substring(0, 4));
+        int month = Integer.parseInt(date.substring(5, 7));
+        int day = Integer.parseInt(date.substring(8, 10));
+        System.out.println("enter a Time (12:30): ");
+        String time = sc.nextLine();
+        int hour = Integer.parseInt(time.substring(0, 2));
+        int minute = Integer.parseInt(time.substring(3, 5));
+        try {
+            ApplicationContext.getExamService().addExam(new Exam( name, LocalDate.of(year,month,day), LocalTime.of(hour,minute),SecurityContext.teacher.getCourseID()));
+            System.out.println("dune added exam");
+        }catch (Exception exception){
+            System.out.println(exception.getMessage());
+        }
     }
 
 }

@@ -2,6 +2,7 @@ package service.impl;
 
 import model.Course;
 import model.dto.CourseDto;
+import model.dto.Reportcard;
 import repository.CourseRepository;
 import repository.CourseStudentRepository;
 import service.CourseStudentService;
@@ -11,6 +12,7 @@ import util.SecurityContext;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
+
 
 public class CourseStudentServiceImpl implements CourseStudentService {
     private final CourseStudentRepository csr;
@@ -63,6 +65,15 @@ public class CourseStudentServiceImpl implements CourseStudentService {
             System.out.println(e.getMessage());
         }
         System.out.println("\033[0m");
+    }
+
+    @Override
+    public Optional<List<Reportcard>> reportCard() throws SQLException {
+        Optional<List<Reportcard>> optionalReportCards=csr.reportCard(SecurityContext.student.getStudentId());
+        if (optionalReportCards.isEmpty()) {
+            throw new SQLException("Course not found");
+        }
+        return optionalReportCards;
     }
 
     @Override
